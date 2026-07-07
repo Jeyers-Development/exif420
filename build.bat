@@ -1,14 +1,13 @@
 @echo off
 setlocal enabledelayedexpansion
 
-mkdir out
-cd out
+if not exist out mkdir out
 
-g++ -c ../exif420.cpp -o exif420.o -w
+g++ -c src/exif420.cpp -o out/exif420.o -Iinclude -w 
 
-g++ -shared -o exif420.dll exif420.o -w -Wl,--out-implib,libexif420.a
+g++ -shared -o out/exif420.dll -Iinclude out/exif420.o -w -Wl,--out-implib,out/libexif420.a
 
-rm exif420.o
+rm out/exif420.o
 
 echo Build complete (Warnings suppressed).
 pause
